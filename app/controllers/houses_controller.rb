@@ -10,6 +10,7 @@ class HousesController < ApplicationController
 
   def new
     @house = House.new
+    2.times { @house.stations.build }
   end
 
   def edit
@@ -55,6 +56,18 @@ class HousesController < ApplicationController
     end
 
     def house_params
-      params.require(:house).permit(:name, :rent, :adress, :age, :content)
+      params.require(:house).permit(
+        :name,
+        :rent,
+        :adress,
+        :age,
+        :content,
+        #attributesメソッドを使用し、インスタンスの属性（オブジェクトが持っている値）一覧を取得
+        stations_attributes: [
+          :route_name,
+          :station_name,
+          :walking_minutes
+        ],
+      )
     end
 end
