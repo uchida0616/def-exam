@@ -1,19 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>物件名:</strong>
   <%= @house.name %>
 </p>
 
 <p>
-  <strong>Rent:</strong>
+  <strong>賃料:</strong>
   <%= @house.rent %>
 </p>
 
 <p>
-  <strong>:</strong>
-  <%= @house. %>
+  <strong>住所</strong>
+  <%= @house.adress %>
 </p>
 
-<%= link_to 'Edit', edit_house_path(@house) %> |
-<%= link_to 'Back', houses_path %>
+<p>
+  <strong>築年数</strong>
+  <%= @house.age %>
+</p>
+
+<p>
+  <strong>備考</strong>
+  <%= @house.content %>
+</p>
+
+<%= link_to '編集', edit_house_path(@house) %> |
+<%= link_to '戻る', houses_path %>
