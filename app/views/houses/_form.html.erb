@@ -37,7 +37,7 @@
   </div>
   <% n = 0 %>
   <%= form.fields_for :stations do |station| %>
-<h3>最寄駅<%= n += 1 %></h3>
+  <h3>最寄駅<%= n += 1 %></h3>
   <div class="field">
     <%= station.label "路線名" %>
     <%= station.text_field :route_name %>
