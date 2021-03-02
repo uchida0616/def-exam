@@ -6,11 +6,12 @@ class HousesController < ApplicationController
   end
 
   def show
+    @houses = Station.all
   end
 
   def new
     @house = House.new
-    2.times { @house.stations.build }
+    2.times {@house.stations.build}
   end
 
   def edit
