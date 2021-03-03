@@ -15,6 +15,7 @@ class HousesController < ApplicationController
   end
 
   def edit
+    @stations = House.all
   end
 
   def create
