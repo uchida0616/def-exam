@@ -1,5 +1,4 @@
 <p id="notice"><%= notice %></p>
-
 <p>
   <strong>物件名:</strong>
   <%= @house.name %>
@@ -24,9 +23,8 @@
   <strong>備考</strong>
   <%= @house.content %>
 </p>
-
+<% @stations.each do |station| %>
 <% n = 0 %>
-<% @houses.each do |station|%>
   <h3>最寄駅<%= n += 1 %></h3>
   <p>
       <strong>路線名:</strong>
@@ -43,6 +41,5 @@
     <%= station.walking_minutes %><span>分</span>
   </p>
 <% end %>
-
-<%= link_to '編集', edit_house_path(@house) %> |
+<%= link_to '編集', edit_house_path(@house) %>
 <%= link_to '戻る', houses_path %>

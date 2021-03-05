@@ -6,41 +6,34 @@ class HousesController < ApplicationController
   end
 
   def show
-    @houses = Station.all
+    @stations = @house.stations
   end
 
   def new
     @house = House.new
-    2.times {@house.stations.build}
+    2.times { @house.stations.build }
   end
 
   def edit
-    @stations = House.all
+    @house.stations.build
   end
 
   def create
     @house = House.new(house_params)
-
-    respond_to do |format|
       if @house.save
-        format.html { redirect_to @house, notice: 'House was successfully created.' }
-        format.json { render :show, status: :created, location: @house }
+        redirect_to houses_path: "物件を登録しました"
       else
-        format.html { render :new }
-        format.json { render json: @house.errors, status: :unprocessable_entity }
+        2.times { @house.stations.build }
+        render :new
       end
-    end
   end
 
   def update
-    respond_to do |format|
-      if @house.update(house_params)
-        format.html { redirect_to @house, notice: 'House was successfully updated.' }
-        format.json { render :show, status: :ok, location: @house }
-      else
-        format.html { render :edit }
-        format.json { render json: @house.errors, status: :unprocessable_entity }
-      end
+    if @house.update(house_params)
+      redirect_to houses_path, notice: "物件を編集しました"
+    else
+      @house.stations.build
+      render :edit
     end
   end
 
@@ -58,18 +51,6 @@ class HousesController < ApplicationController
     end
 
     def house_params
-      params.require(:house).permit(
-        :name,
-        :rent,
-        :adress,
-        :age,
-        :content,
-        #attributesメソッドを使用し、インスタンスの属性（オブジェクトが持っている値）一覧を取得
-        stations_attributes: [
-          :route_name,
-          :station_name,
-          :walking_minutes
-        ],
-      )
+      params.require(:house).permit(:name, :rent, :adress, :age, :content, stations_attributes: [:route_name, :station_name, :walking_minutes, :id, :_destroy, :house_id])
     end
 end
