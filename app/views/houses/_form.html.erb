@@ -1,0 +1,60 @@
+<%= form_with(model: @house, local: true) do |form| %>
+  <% if house.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(house.errors.count, "error") %> prohibited this house from being saved:</h2>
+
+      <ul>
+      <% house.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label "物件名" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label "賃料" %>
+    <%= form.number_field :rent %><span>円</span>
+  </div>
+
+  <div class="field">
+    <%= form.label "住所" %>
+    <%= form.text_field :adress %>
+  </div>
+
+  <div class="field">
+    <%= form.label "築年数" %>
+    <%= form.text_field :age %><span>年</span>
+  </div>
+
+  <div class="field">
+    <%= form.label "備考" %>
+    <%= form.text_area :content%>
+  </div>
+  <% n = 0 %>
+  <%= form.fields_for :stations do |station| %>
+  <h3>最寄駅<%= n += 1 %></h3>
+  <div class="field">
+    <%= station.label "路線名" %>
+    <%= station.text_field :route_name %>
+  </div>
+
+  <div class="field">
+    <%= station.label "駅名" %>
+    <%= station.text_field :station_name %>
+  </div>
+
+  <div class="field">
+    <%= station.label "徒歩分数" %>
+    <%= station.text_field :walking_minutes %><span>分</span>
+  </div>
+  <% end %>
+  <div class="actions">
+    <%= form.submit "登録する" %>
+  </div>
+
+<% end %>
